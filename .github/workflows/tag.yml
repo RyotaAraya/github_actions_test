@@ -2,7 +2,7 @@ name: Git Tag
 on:
  pull_request:
    branches:
-     - main
+     - master
    types:
      - closed
 jobs:
