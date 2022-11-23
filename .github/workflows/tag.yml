@@ -12,6 +12,8 @@ jobs:
    steps:
      - uses: actions/checkout@v2
      - run: git fetch origin ${{ github.event.pull_request.head.ref }}
+     - run: echo '${{ github.event.pull_request.head.ref }}' | sed 's/release-/v/' > TAG_NAME
      - run: git checkout ${{ github.base_ref }}
-     - run: git tag `echo '${{ github.event.pull_request.head.ref }}' | sed 's/release-/v/'`
-     - run: git push origin `echo '${{ github.base_ref }}' | sed 's/release-/v/'`
+     - run: git tag $(cat TAG_NAME)
+     - run: git push origin $(cat TAG_NAME)
+
